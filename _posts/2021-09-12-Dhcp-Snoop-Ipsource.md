@@ -5,8 +5,6 @@ tags: DHCP Snooping and Ip Source Guard
 categories: dhcpSnooping
 ---
 
-# DHCP SNOOPING and IP Source Guard
-
 > Ahmet Numan Aytemiz, 12.09.2021
 
 ---
