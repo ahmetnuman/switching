@@ -17,12 +17,12 @@ categories: dhcpSnooping
 
 **Tasks**
 
-- 1. On the SW2-CLIENT swtchthes, configure ethernet 0/0 as layer 3 interface and configure it to simulate dhcp client.
-- 2. On the SW1 switches configure ethernet 0/0 as a access port and assign it VLAN 1 which is default VLAN.
-- 3. On the SW1 switches configure ethernet 0/1 as trunk interface with encapsulation 802.1q
-- 4. On the SW3-SERVER switches configure ethernet 0/0 as trunk interface with encapsulation 802.1q
-- 5. On the SW3-SERVER switches configure VLAN 1 SVI Ip address with 192.168.7.3/24 ip address
-- 6. On the SW3-SERVER switches configure DHCP server with following conditions
+1. On the SW2-CLIENT swtchthes, configure ethernet 0/0 as layer 3 interface and configure it to simulate dhcp client.
+2. On the SW1 switches configure ethernet 0/0 as a access port and assign it VLAN 1 which is default VLAN.
+3. On the SW1 switches configure ethernet 0/1 as trunk interface with encapsulation 802.1q
+4. On the SW3-SERVER switches configure ethernet 0/0 as trunk interface with encapsulation 802.1q
+5. On the SW3-SERVER switches configure VLAN 1 SVI Ip address with 192.168.7.3/24 ip address
+6. On the SW3-SERVER switches configure DHCP server with following conditions
      - DHCP Scope : 192.168.7.100-254/24
      - Default Gateway : 192.168.7.1
      - Lease Time : 7 Days
@@ -30,22 +30,22 @@ categories: dhcpSnooping
 
 **Tasks For DHCP Snooping:**
 
-- 7.  Enable DHCP Snooping On the SW1  for VLAN 1  
-- 8.  Configure ethernet 0/1 as a trusted interface on the SW1 
-- 9.  Disable DHCP option 82 on the SW1
-- 10. Renew IPv4 address of ethernet 0/0 and verify it is still working
+7.  Enable DHCP Snooping On the SW1  for VLAN 1  
+8.  Configure ethernet 0/1 as a trusted interface on the SW1 
+9.  Disable DHCP option 82 on the SW1
+10. Renew IPv4 address of ethernet 0/0 and verify it is still working
 
 **Tasks for IP Source Guard**
 
-- 11. Configure linux machine static ip address with the 192.168.7.46/24 and start the ICMP traffic to 192.168.7.3
-- 12. Enable IP Source Guard on the ethernet range 0/0-0/3 SW1 and verify the linux machine ICMP traffic dropped.
-- 13. Configure linux machine's interface address as a dhcp client and ping to 192.168.7.3 ip address again.
-- 14. Configure SW1 ethernet 0/0 as manuel ip source binding, then configure SW2-CLIENT's ethernet 0/0 interface with the static ip 192.168.7.11/24
-- 15. Ensure that IP Source Guard does note block any traffic from SW2-client 
+11. Configure linux machine static ip address with the 192.168.7.46/24 and start the ICMP traffic to 192.168.7.3
+12. Enable IP Source Guard on the ethernet range 0/0-0/3 SW1 and verify the linux machine ICMP traffic dropped.
+13. Configure linux machine's interface address as a dhcp client and ping to 192.168.7.3 ip address again.
+14. Configure SW1 ethernet 0/0 as manuel ip source binding, then configure SW2-CLIENT's ethernet 0/0 interface with the static ip 192.168.7.11/24
+15. Ensure that IP Source Guard does note block any traffic from SW2-client 
 
 **Solutions**
 
-- 1. On the SW2-CLIENT swtchthes, configure ethernet 0/0 as layer 3 interface and configure it to simulate dhcp client.
+1. On the SW2-CLIENT swtchthes, configure ethernet 0/0 as layer 3 interface and configure it to simulate dhcp client.
 
 ```
 SW2-CLIENT(config)#interface Ethernet0/0
@@ -57,7 +57,7 @@ SW2-CLIENT(config-if)#ip address dhcp
 
 ---
 
-- 2. On the SW1 switches configure ethernet 0/0 as a access port and assign it VLAN 1 which is default VLAN.
+2. On the SW1 switches configure ethernet 0/0 as a access port and assign it VLAN 1 which is default VLAN.
 
 ```
 SW1(config)#interface Ethernet0/0
@@ -68,7 +68,7 @@ SW1(config-if)#switchport access vlan 1
 
 ---
 
-- 3. On the SW1 switches configure ethernet 0/1 as trunk interface with encapsulation 802.1q
+3. On the SW1 switches configure ethernet 0/1 as trunk interface with encapsulation 802.1q
 
 ```
 SW1(config)#interface Ethernet0/1
@@ -79,7 +79,7 @@ SW1(config-if)#switchport mode trunk
 
 ---
 
-- 4. On the SW3-SERVER switches configure ethernet 0/0 as trunk interface with encapsulation 802.1q
+4. On the SW3-SERVER switches configure ethernet 0/0 as trunk interface with encapsulation 802.1q
 
 ```
 SW3-SERVER(config)#interface Ethernet0/0
@@ -90,7 +90,7 @@ SW3-SERVER(config-if)#switchport mode trunk
 
 ---
 
-- 5. On the SW3-SERVER switches configure VLAN 1 SVI Ip address with 192.168.7.3/24 ip address
+5. On the SW3-SERVER switches configure VLAN 1 SVI Ip address with 192.168.7.3/24 ip address
 
 ```
 SW3-SERVER(config)#interface Vlan1
@@ -100,7 +100,7 @@ SW3-SERVER(config-if)#no shut
 
 ---
 
-- 6. On the SW3-SERVER switches configure DHCP server with following conditions
+6. On the SW3-SERVER switches configure DHCP server with following conditions
      - DHCP Scope : 192.168.7.100-254/24
      - Default Gateway : 192.168.7.1
      - Lease Time : 7 Days
@@ -117,7 +117,7 @@ SW3-SERVER(config)#ip dhcp excluded-address 192.168.7.1 192.168.7.99
 
 ---
 
-- 7.  Enable DHCP Snooping On the SW1  for VLAN 1  
+7.  Enable DHCP Snooping On the SW1  for VLAN 1  
 
 ```
 ip dhcp snooping
@@ -126,7 +126,7 @@ ip dhcp snooping vlan 1
 
 ---
 
-- 8.  Configure ethernet 0/1 as a trusted interface on the SW1 
+8.  Configure ethernet 0/1 as a trusted interface on the SW1 
 
 ```
 SW1(config)#interface Ethernet0/1
@@ -135,7 +135,7 @@ SW1(config-if)#ip dhcp snooping trust
 
 ---
 
-- 9.  Disable DHCP option 82 on the SW1
+9.  Disable DHCP option 82 on the SW1
 
 ```
 SW1(config)#no ip dhcp snooping information option
@@ -143,7 +143,7 @@ SW1(config)#no ip dhcp snooping information option
 
 ---
 
-- 10. Renew IPv4 address of ethernet 0/0 and verify it is still working
+10. Renew IPv4 address of ethernet 0/0 and verify it is still working
 
 ```
 SW2-CLIENT(config)#interface ethernet 0/0
@@ -155,7 +155,7 @@ SW2-CLIENT(config-if)#do show ip interface brief
 
 ---
 
-- 11. Configure tiny linux machine static ip address with the 192.168.7.46/24 and start the ICMP traffic to 192.168.7.3
+11. Configure tiny linux machine static ip address with the 192.168.7.46/24 and start the ICMP traffic to 192.168.7.3
 
 ```
 ifconfig eth0 192.168.7.46 255.255.255.0
@@ -164,20 +164,20 @@ ping 192.168.7.3
 
 ---
 
-- 12. Enable IP Source Guard on the ethernet range 0/0-0/3 SW1 and verify the linux machine ICMP traffic dropped.
+12. Enable IP Source Guard on the ethernet range 0/0-0/3 SW1 and verify the linux machine ICMP traffic dropped.
 
 ```
 SW1(config)#interface range ethernet 0/0-3
 SW1(config-if-range)#ip verify source
 ```
 
-- 13. Configure tiny linux machine's interface address as a dhcp client and ping to 192.168.7.3 ip address again.
+13. Configure tiny linux machine's interface address as a dhcp client and ping to 192.168.7.3 ip address again.
 
 ```
 sudo /etc/init.d/network restart
 ```
 
-- 14. Configure SW1 ethernet 0/0 as manuel ip source binding, then configure SW2-CLIENT's ethernet 0/0 interface with the static ip 192.168.7.11/24
+14. Configure SW1 ethernet 0/0 as manuel ip source binding, then configure SW2-CLIENT's ethernet 0/0 interface with the static ip 192.168.7.11/24
 
 ```
 SW1#show mac address-table interface ethernet 0/0
@@ -188,7 +188,7 @@ SW1(config)#ip source binding  aabb.cc00.3000 vlan 1 192.168.7.11 interface ethe
 
 ---
 
-- 15. Ensure that IP Source Guard does note block any traffic from SW2-client 
+15. Ensure that IP Source Guard does note block any traffic from SW2-client 
 
 ```
 SW2-CLIENT(config)#interface Ethernet0/0
